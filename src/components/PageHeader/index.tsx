@@ -19,7 +19,6 @@ const Details = styled.div`
 `
 const StyledHeading = styled(Heading)`
   font-size: 28px;
-  font-weight: 700;
 `
 const HeaderWrapper = styled.div`
   display: flex;
@@ -28,7 +27,6 @@ const HeaderWrapper = styled.div`
 `
 const HeaderActionWrapper = styled.div``
 const StyledText = styled(Text)`
-  font-family: GilroySemiBold;
   line-height: unset;
 `
 
@@ -43,7 +41,7 @@ const PageHeader = ({ title, description, children }: PageHeaderProps) => {
           <StyledHeading>{title}</StyledHeading>
           <HeaderWrapper>
             {description && (
-              <StyledText color="primary" fontSize="16px">
+              <StyledText color="primary" fontSize="16px" bold>
                 {description}
               </StyledText>
             )}
@@ -58,7 +56,7 @@ const PageHeader = ({ title, description, children }: PageHeaderProps) => {
           </HeaderWrapper>
         </Details>
       </Flex>
-      {children && <Text mt="16px">{children}</Text>}
+      {children && children}
     </StyledPageHeader>
   )
 }

@@ -17,11 +17,9 @@ const StyledCardBody = styled(CardBody)`
 `
 const StyledText = styled(Text)`
   color: ${({ theme }) => theme.colors.text};
-  font-weight: 600;
 `
 const PercentValue = styled(Text)`
   color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
 `
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
@@ -34,11 +32,13 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
       <StyledCardBody>
         <RowBetween style={{ marginBottom: 4 }}>
           <RowFixed>
-            <StyledText fontSize="16px">{isExactIn ? 'Minimum received' : 'Maximum sold'}</StyledText>
+            <StyledText fontSize="16px" bold>
+              {isExactIn ? 'Minimum received' : 'Maximum sold'}
+            </StyledText>
             <QuestionHelper text="Your transaction will revert if there is a large, unfavorable price movement before it is confirmed." />
           </RowFixed>
           <RowFixed>
-            <StyledText fontSize="16px">
+            <StyledText fontSize="16px" bold>
               {isExactIn
                 ? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${trade.outputAmount.currency.symbol}` ??
                   '-'
@@ -49,10 +49,12 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         </RowBetween>
         <RowBetween style={{ marginBottom: 4 }}>
           <RowFixed>
-            <StyledText fontSize="16px">Price Impact</StyledText>
+            <StyledText fontSize="16px" bold>
+              Price Impact
+            </StyledText>
             <QuestionHelper text="The difference between the market price and estimated price due to trade size." />
           </RowFixed>
-          <PercentValue fontSize="16px" color="primary">
+          <PercentValue fontSize="16px" color="primary" bold>
             {priceImpactWithoutFee
               ? priceImpactWithoutFee.lessThan(ONE_BIPS)
                 ? '<0.01%'
@@ -63,10 +65,12 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 
         <RowBetween>
           <RowFixed>
-            <StyledText fontSize="16px">Liquidity Provider Fee</StyledText>
+            <StyledText fontSize="16px" bold>
+              Liquidity Provider Fee
+            </StyledText>
             <QuestionHelper text="For each trade a 0.2% fee is paid. 0.17% goes to liquidity providers and 0.03% goes to the PancakeSwap treasury." />
           </RowFixed>
-          <StyledText fontSize="16px">
+          <StyledText fontSize="16px" bold>
             {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
           </StyledText>
         </RowBetween>

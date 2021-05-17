@@ -43,9 +43,6 @@ const StyledButton = styled(Button)`
   border-radius: 6px;
   width: 53px;
 `
-const StyledText = styled(Text)`
-  font-weight: 600;
-`
 const StyledInput = styled(Input)<{ isWarning?: boolean }>`
   height: 36px;
   border-radius: 6px;
@@ -107,9 +104,9 @@ const SlippageToleranceSettings = () => {
   return (
     <StyledSlippageToleranceSettings>
       <Label>
-        <StyledText>
+        <Text bold>
           <TranslatedText translationId={88}>Slippage tolerance</TranslatedText>
-        </StyledText>
+        </Text>
         <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
       </Label>
       <Options>
@@ -143,7 +140,9 @@ const SlippageToleranceSettings = () => {
               isWarning={error !== null}
             />
           </Option>
-          <StyledText fontSize="14px">%</StyledText>
+          <Text fontSize="14px" bold>
+            %
+          </Text>
         </Flex>
       </Options>
       {error && (

@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react'
+import styled from 'styled-components'
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@pancakeswap-libs/sdk'
@@ -35,6 +36,10 @@ import { currencyId } from 'utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
 import Pane from 'components/Pane'
 import ConnectWalletButton from 'components/ConnectWalletButton'
+
+const StyledCardBody = styled(CardBody)`
+  padding: 32px 31px 38px 31px;
+`
 
 export default function AddLiquidity({
   match: {
@@ -313,15 +318,15 @@ export default function AddLiquidity({
             )}
             pendingText={pendingText}
           />
-          <CardBody>
-            <AutoColumn gap="20px">
+          <StyledCardBody>
+            <AutoColumn gap="16px">
               {noLiquidity && (
                 <ColumnCenter>
                   <Pane>
                     <AutoColumn gap="12px">
-                      <UIKitText>You are the first liquidity provider.</UIKitText>
-                      <UIKitText>The ratio of tokens you add will set the price of this pool.</UIKitText>
-                      <UIKitText>Once you are happy with the rate click supply to review.</UIKitText>
+                      <UIKitText bold>You are the first liquidity provider.</UIKitText>
+                      <UIKitText bold>The ratio of tokens you add will set the price of this pool.</UIKitText>
+                      <UIKitText bold>Once you are happy with the rate click supply to review.</UIKitText>
                     </AutoColumn>
                   </Pane>
                 </ColumnCenter>
@@ -339,7 +344,7 @@ export default function AddLiquidity({
                 showCommonBases={false}
               />
               <ColumnCenter>
-                <AddIcon color="textSubtle" />
+                <AddIcon color="primary" />
               </ColumnCenter>
               <CurrencyInputPanel
                 value={formattedAmounts[Field.CURRENCY_B]}
@@ -355,13 +360,8 @@ export default function AddLiquidity({
               />
               {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
                 <div>
-                  <UIKitText
-                    style={{ textTransform: 'uppercase', fontWeight: 600 }}
-                    color="textSubtle"
-                    fontSize="12px"
-                    mb="2px"
-                  >
-                    {noLiquidity ? 'Initial prices and pool share' : 'Prices and pool share'}
+                  <UIKitText color="text" bold mb="16px" mt="32px">
+                    {noLiquidity ? 'INITIAL PRICES AND POOL SHARE' : 'PRICES AND POOL SHARE'}
                   </UIKitText>
                   <Pane>
                     <PoolPriceBar
@@ -429,11 +429,11 @@ export default function AddLiquidity({
                 </AutoColumn>
               )}
             </AutoColumn>
-          </CardBody>
+          </StyledCardBody>
         </Wrapper>
       </AppBody>
       {pair && !noLiquidity && pairState !== PairState.INVALID ? (
-        <AutoColumn style={{ minWidth: '20rem', marginTop: '1rem' }}>
+        <AutoColumn style={{ maxWidth: 473, marginTop: 16, width: '100%' }}>
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
       ) : null}

@@ -67,7 +67,6 @@ const Aligner = styled.span`
   justify-content: space-between;
 `
 const StyledText1 = styled(Text)`
-  font-weight: 700;
   line-height: unset;
   color: ${({ theme }) => theme.colors.footer};
 `
@@ -168,7 +167,7 @@ export default function CurrencyInputPanel({
                   {pair?.token0.symbol}:{pair?.token1.symbol}
                 </Text>
               ) : (
-                <StyledText1 fontSize="14px">
+                <StyledText1 fontSize="14px" bold>
                   {(currency && currency.symbol && currency.symbol.length > 20
                     ? currency.symbol.slice(0, 4) +
                       '...' +

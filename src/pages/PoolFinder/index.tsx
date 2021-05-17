@@ -1,8 +1,8 @@
+import React, { useCallback, useEffect, useState, useContext } from 'react'
+import styled, { ThemeContext } from 'styled-components'
 import { Currency, ETHER, JSBI, TokenAmount } from '@pancakeswap-libs/sdk'
-import React, { useCallback, useEffect, useState } from 'react'
 import { Button, ChevronDownIcon, AddIcon, CardBody, Text } from 'kebabfinance-uikit'
 import CardNav from 'components/CardNav'
-import { LightCard } from 'components/Card'
 import { AutoColumn, ColumnCenter } from 'components/Column'
 import CurrencyLogo from 'components/CurrencyLogo'
 import { FindPoolTabs } from 'components/NavigationTabs'
@@ -23,7 +23,18 @@ enum Fields {
   TOKEN1 = 1
 }
 
+const StyledCardBody = styled(CardBody)`
+  padding: 32px 31px 38px 31px;
+`
+const LiquidityWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+`
+
 export default function PoolFinder() {
+  const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
 
   const [showSearch, setShowSearch] = useState<boolean>(false)
@@ -68,11 +79,11 @@ export default function PoolFinder() {
   }, [setShowSearch])
 
   const prerequisiteMessage = (
-    <LightCard padding="45px 10px">
-      <Text style={{ textAlign: 'center' }}>
+    <LiquidityWrapper>
+      <Text color={theme.colors.textInactive} bold>
         {!account ? 'Connect to a wallet to find pools' : 'Select a token to find your liquidity.'}
       </Text>
-    </LightCard>
+    </LiquidityWrapper>
   )
 
   return (
@@ -80,8 +91,8 @@ export default function PoolFinder() {
       <CardNav activeIndex={1} />
       <AppBody>
         <FindPoolTabs />
-        <CardBody>
-          <AutoColumn gap="md">
+        <StyledCardBody>
+          <AutoColumn gap="16px">
             <Button
               onClick={() => {
                 setShowSearch(true)
@@ -95,7 +106,7 @@ export default function PoolFinder() {
             </Button>
 
             <ColumnCenter>
-              <AddIcon color="textSubtle" />
+              <AddIcon color="primary" />
             </ColumnCenter>
 
             <Button
@@ -123,43 +134,49 @@ export default function PoolFinder() {
                 hasPosition && pair ? (
                   <MinimalPositionCard pair={pair} />
                 ) : (
-                  <LightCard padding="45px 10px">
+                  <LiquidityWrapper>
                     <AutoColumn gap="sm" justify="center">
-                      <Text style={{ textAlign: 'center' }}>You don’t have liquidity in this pool yet.</Text>
+                      <Text color={theme.colors.textInactive} bold>
+                        You don’t have liquidity in this pool yet.
+                      </Text>
                       <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                        <Text style={{ textAlign: 'center' }}>
+                        <Text color={theme.colors.primary} bold style={{ marginTop: -5 }}>
                           <TranslatedText translationId={100}>Add Liquidity</TranslatedText>
                         </Text>
                       </StyledInternalLink>
                     </AutoColumn>
-                  </LightCard>
+                  </LiquidityWrapper>
                 )
               ) : validPairNoLiquidity ? (
-                <LightCard padding="45px 10px">
+                <LiquidityWrapper>
                   <AutoColumn gap="sm" justify="center">
-                    <Text style={{ textAlign: 'center' }}>No pool found.</Text>
+                    <Text color={theme.colors.textInactive} bold>
+                      No pool found.
+                    </Text>
                     <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                      Create pool.
+                      <Text color={theme.colors.primary} bold style={{ marginTop: -5 }}>
+                        Create pool.
+                      </Text>
                     </StyledInternalLink>
                   </AutoColumn>
-                </LightCard>
+                </LiquidityWrapper>
               ) : pairState === PairState.INVALID ? (
-                <LightCard padding="45px 10px">
+                <LiquidityWrapper>
                   <AutoColumn gap="sm" justify="center">
-                    <Text style={{ textAlign: 'center' }}>
+                    <Text color={theme.colors.textInactive} bold>
                       <TranslatedText translationId={136}>Invalid pair.</TranslatedText>
                     </Text>
                   </AutoColumn>
-                </LightCard>
+                </LiquidityWrapper>
               ) : pairState === PairState.LOADING ? (
-                <LightCard padding="45px 10px">
+                <LiquidityWrapper>
                   <AutoColumn gap="sm" justify="center">
-                    <Text style={{ textAlign: 'center' }}>
+                    <Text color={theme.colors.textInactive} bold>
                       Loading
                       <Dots />
                     </Text>
                   </AutoColumn>
-                </LightCard>
+                </LiquidityWrapper>
               ) : null
             ) : (
               prerequisiteMessage
@@ -173,7 +190,7 @@ export default function PoolFinder() {
             showCommonBases
             selectedCurrency={(activeField === Fields.TOKEN0 ? currency1 : currency0) ?? undefined}
           />
-        </CardBody>
+        </StyledCardBody>
       </AppBody>
     </>
   )

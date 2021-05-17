@@ -1,9 +1,8 @@
 import { CurrencyAmount, JSBI, Token, Trade } from '@pancakeswap-libs/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
 import { ArrowDown } from 'react-feather'
 import { CardBody, SyncVerticalIcon, Button, IconButton, Text } from 'kebabfinance-uikit'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import AddressInputPanel from 'components/AddressInputPanel'
 import Card, { GreyCard } from 'components/Card'
 import { AutoColumn } from 'components/Column'
@@ -50,7 +49,6 @@ const StyledIconButton = styled(IconButton)`
 `
 const StyledText = styled(Text)<{ account?: string | null }>`
   color: ${({ account, theme }) => (!account ? '#A4A9AD' : theme.colors.text)};
-  font-weight: 600;
 `
 
 const Swap = () => {
@@ -381,7 +379,7 @@ const Swap = () => {
                   <AutoColumn gap="8px">
                     {Boolean(trade) && (
                       <RowBetween align="center">
-                        <StyledText fontSize="16px" account={account}>
+                        <StyledText fontSize="16px" account={account} bold>
                           Price
                         </StyledText>
                         <TradePrice
@@ -393,10 +391,10 @@ const Swap = () => {
                     )}
                     {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
                       <RowBetween align="center">
-                        <StyledText fontSize="16px" account={account}>
+                        <StyledText fontSize="16px" account={account} bold>
                           Slippage Tolerance
                         </StyledText>
-                        <StyledText fontSize="16px" account={account}>
+                        <StyledText fontSize="16px" account={account} bold>
                           {allowedSlippage / 100}%
                         </StyledText>
                       </RowBetween>

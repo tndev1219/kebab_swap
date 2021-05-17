@@ -38,7 +38,6 @@ interface CurrencySearchProps {
 }
 
 const StyledText = styled(Text)`
-  font-weight: 600;
   display: flex;
   align-items: center;
 `
@@ -147,7 +146,7 @@ export function CurrencySearch({
     <Column style={{ width: '100%', flex: '1 1' }}>
       <PaddedColumn gap="4px">
         <RowBetween mb="20px">
-          <StyledText>
+          <StyledText bold>
             <TranslatedText translationId={82}>Select a token</TranslatedText>
             <QuestionHelper
               text={TranslateString(
@@ -177,8 +176,6 @@ export function CurrencySearch({
           <SortButton ascending={invertSearchOrder} toggleSortOrder={() => setInvertSearchOrder(iso => !iso)} />
         </RowBetween>
       </PaddedColumn>
-
-      <Separator />
 
       <div style={{ flex: '1' }}>
         <AutoSizer disableWidth>

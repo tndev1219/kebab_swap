@@ -14,7 +14,6 @@ const StyledText = styled(Text)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 600;
   color: ${({ theme }) => theme.colors.text};
 `
 
@@ -27,7 +26,7 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
     : `${price?.baseCurrency?.symbol} per ${price?.quoteCurrency?.symbol}`
 
   return (
-    <StyledText fontSize="16px">
+    <StyledText fontSize="16px" bold>
       {show ? (
         <>
           {formattedPrice ?? '-'} {label}

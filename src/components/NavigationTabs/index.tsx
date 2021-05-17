@@ -71,12 +71,17 @@ const StyledNavLink = styled(NavLink).attrs({
 `
 
 const ActiveText = styled.div`
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 28px;
 `
 
 const StyledArrowLeft = styled(ArrowLeft)`
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.primary};
+`
+
+const StyledRowBetween = styled(RowBetween)`
+  padding: 38px 31px 16px 31px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `
 
 export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
@@ -118,13 +123,13 @@ export const Nav = ({ activeIndex = 0 }: { activeIndex?: number }) => (
 export function FindPoolTabs() {
   return (
     <Tabs>
-      <RowBetween style={{ padding: '1rem' }}>
+      <StyledRowBetween>
         <HistoryLink to="/pool">
           <StyledArrowLeft />
         </HistoryLink>
         <ActiveText>Import Pool</ActiveText>
         <QuestionHelper text={"Use this tool to find pairs that don't automatically appear in the interface."} />
-      </RowBetween>
+      </StyledRowBetween>
     </Tabs>
   )
 }
@@ -132,7 +137,7 @@ export function FindPoolTabs() {
 export function AddRemoveTabs({ adding }: { adding: boolean }) {
   return (
     <Tabs>
-      <RowBetween style={{ padding: '1rem' }}>
+      <StyledRowBetween>
         <HistoryLink to="/pool">
           <StyledArrowLeft />
         </HistoryLink>
@@ -144,7 +149,7 @@ export function AddRemoveTabs({ adding }: { adding: boolean }) {
               : 'Removing pool tokens converts your position back into underlying tokens at the current rate, proportional to your share of the pool. Accrued fees are included in the amounts you receive.'
           }
         />
-      </RowBetween>
+      </StyledRowBetween>
     </Tabs>
   )
 }

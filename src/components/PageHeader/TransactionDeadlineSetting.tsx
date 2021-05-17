@@ -19,9 +19,6 @@ const Field = styled.div`
     max-width: 100px;
   }
 `
-const StyledText = styled(Text)`
-  font-weight: 600;
-`
 const StyledInput = styled(Input)`
   height: 36px;
   border-radius: 6px;
@@ -68,16 +65,16 @@ const TransactionDeadlineSetting = () => {
   return (
     <StyledTransactionDeadlineSetting>
       <Label>
-        <StyledText style={{ fontWeight: 600 }}>
+        <Text bold>
           <TranslatedText translationId={90}>Transaction deadline</TranslatedText>
-        </StyledText>
+        </Text>
         <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
       </Label>
       <Field>
         <StyledInput type="number" step="1" min="1" value={value} onChange={handleChange} />
-        <StyledText fontSize="14px" ml="12px">
+        <Text fontSize="14px" ml="12px" bold>
           minutes
-        </StyledText>
+        </Text>
       </Field>
       {error && (
         <Text mt="8px" color="failure">
