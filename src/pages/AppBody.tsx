@@ -4,7 +4,7 @@ import { Card } from 'kebabfinance-uikit'
 
 export const BodyWrapper = styled(Card)`
   position: relative;
-  max-width: 436px;
+  max-width: 473px;
   width: 100%;
 `
 

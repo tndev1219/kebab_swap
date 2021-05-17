@@ -5,16 +5,12 @@ import { useUserDeadline } from 'state/user/hooks'
 import QuestionHelper from '../QuestionHelper'
 import TranslatedText from '../TranslatedText'
 
-const StyledTransactionDeadlineSetting = styled.div`
-  margin-bottom: 16px;
-`
-
+const StyledTransactionDeadlineSetting = styled.div``
 const Label = styled.div`
   align-items: center;
   display: flex;
   margin-bottom: 8px;
 `
-
 const Field = styled.div`
   align-items: center;
   display: inline-flex;
@@ -22,10 +18,25 @@ const Field = styled.div`
   & > ${Input} {
     max-width: 100px;
   }
+`
+const StyledText = styled(Text)`
+  font-weight: 600;
+`
+const StyledInput = styled(Input)`
+  height: 36px;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.currencySelectBackground};
+  color: ${({ theme }) => theme.colors.footer};
+  font-weight: 600;
+  border: none;
+  box-shadow: none !important;
 
-  & > ${Text} {
-    font-size: 14px;
-    margin-left: 8px;
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.footer};
+  }
+
+  :focus {
+    box-shadow: none !important;
   }
 `
 
@@ -57,14 +68,16 @@ const TransactionDeadlineSetting = () => {
   return (
     <StyledTransactionDeadlineSetting>
       <Label>
-        <Text style={{ fontWeight: 600 }}>
+        <StyledText style={{ fontWeight: 600 }}>
           <TranslatedText translationId={90}>Transaction deadline</TranslatedText>
-        </Text>
+        </StyledText>
         <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
       </Label>
       <Field>
-        <Input type="number" step="1" min="1" value={value} onChange={handleChange} />
-        <Text>Minutes</Text>
+        <StyledInput type="number" step="1" min="1" value={value} onChange={handleChange} />
+        <StyledText fontSize="14px" ml="12px">
+          minutes
+        </StyledText>
       </Field>
       {error && (
         <Text mt="8px" color="failure">

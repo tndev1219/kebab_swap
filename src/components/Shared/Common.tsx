@@ -45,7 +45,7 @@ export const LinkStyledButton = styled.button<{ disabled?: boolean }>`
 
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   color: ${({ theme, disabled }) => (disabled ? theme.colors.textSubtle : theme.colors.primary)};
-  font-weight: 500;
+  font-weight: 600;
 
   :hover {
     text-decoration: ${({ disabled }) => (disabled ? null : 'underline')};

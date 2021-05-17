@@ -60,10 +60,6 @@ const Input = styled.input<{ error?: boolean }>`
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-
-  ::placeholder {
-    color: ${({ theme }) => theme.colors.textDisabled};
-  }
 `
 
 export default function AddressInputPanel({

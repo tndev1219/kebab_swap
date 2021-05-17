@@ -12,14 +12,18 @@ const RISKY_SLIPPAGE_HIGH = 500
 const StyledSlippageToleranceSettings = styled.div`
   margin-bottom: 16px;
 `
-
-const Option = styled.div`
-  padding: 0 4px;
-`
-
-const Options = styled.div`
+const Label = styled.div`
   align-items: center;
   display: flex;
+  margin-bottom: 16px;
+`
+const Option = styled.div`
+  padding: 0 8px;
+`
+const Options = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-direction: column;
 
   ${Option}:first-child {
@@ -34,11 +38,30 @@ const Options = styled.div`
     flex-direction: row;
   }
 `
+const StyledButton = styled(Button)`
+  font-size: 14px;
+  border-radius: 6px;
+  width: 53px;
+`
+const StyledText = styled(Text)`
+  font-weight: 600;
+`
+const StyledInput = styled(Input)<{ isWarning?: boolean }>`
+  height: 36px;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.currencySelectBackground};
+  color: ${({ theme }) => theme.colors.footer};
+  font-weight: 600;
+  border: ${({ isWarning }) => (!isWarning ? 'none' : '1px solid #E46149')};
+  box-shadow: none !important;
 
-const Label = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: 8px;
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.footer};
+  }
+
+  :focus {
+    box-shadow: none !important;
+  }
 `
 
 const predefinedValues = [
@@ -84,41 +107,43 @@ const SlippageToleranceSettings = () => {
   return (
     <StyledSlippageToleranceSettings>
       <Label>
-        <Text style={{ fontWeight: 600 }}>
+        <StyledText>
           <TranslatedText translationId={88}>Slippage tolerance</TranslatedText>
-        </Text>
+        </StyledText>
         <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
       </Label>
       <Options>
-        <Flex mb={['8px', 0]} mr={[0, '8px']}>
+        <Flex mb={['16px', 0]} mr={[0, '16px']}>
           {predefinedValues.map(({ label, value: predefinedValue }) => {
             const handleClick = () => setValue(predefinedValue)
 
             return (
               <Option key={predefinedValue}>
-                <Button variant={value === predefinedValue ? 'primary' : 'tertiary'} onClick={handleClick}>
+                <StyledButton
+                  variant={value === predefinedValue ? 'primary' : 'switch'}
+                  size="sm"
+                  onClick={handleClick}
+                >
                   {label}
-                </Button>
+                </StyledButton>
               </Option>
             )
           })}
         </Flex>
         <Flex alignItems="center">
           <Option>
-            <Input
+            <StyledInput
               type="number"
-              scale="lg"
+              scale="md"
               step={0.1}
               min={0.1}
-              placeholder="5%"
+              placeholder="0.1"
               value={value}
               onChange={handleChange}
               isWarning={error !== null}
             />
           </Option>
-          <Option>
-            <Text fontSize="18px">%</Text>
-          </Option>
+          <StyledText fontSize="14px">%</StyledText>
         </Flex>
       </Options>
       {error && (

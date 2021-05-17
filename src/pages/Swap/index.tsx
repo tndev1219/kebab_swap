@@ -1,7 +1,8 @@
 import { CurrencyAmount, JSBI, Token, Trade } from '@pancakeswap-libs/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import { ArrowDown } from 'react-feather'
-import { CardBody, ArrowDownIcon, Button, IconButton, Text } from 'kebabfinance-uikit'
+import { CardBody, SyncVerticalIcon, Button, IconButton, Text } from 'kebabfinance-uikit'
 import { ThemeContext } from 'styled-components'
 import AddressInputPanel from 'components/AddressInputPanel'
 import Card, { GreyCard } from 'components/Card'
@@ -38,6 +39,19 @@ import Loader from 'components/Loader'
 import { TranslateString } from 'utils/translateTextHelpers'
 import PageHeader from 'components/PageHeader'
 import ConnectWalletButton from 'components/ConnectWalletButton'
+
+const StyledCardBody = styled(CardBody)`
+  padding: 32px 31px 38px 31px;
+`
+const StyledIconButton = styled(IconButton)`
+  width: 24px;
+  height: 24px;
+  background-color: ${({ theme }) => theme.colors.currencyInput};
+`
+const StyledText = styled(Text)<{ account?: string | null }>`
+  color: ${({ account, theme }) => (!account ? '#A4A9AD' : theme.colors.text)};
+  font-weight: 600;
+`
 
 const Swap = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -90,12 +104,7 @@ const Swap = () => {
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   //   const { address: recipientAddress } = useENSAddress(recipient)
   const toggledVersion = useToggledVersion()
-  const trade = showWrap
-    ? undefined
-    : {
-        [Version.v1]: v1Trade,
-        [Version.v2]: v2Trade
-      }[toggledVersion]
+  const trade = showWrap ? undefined : { [Version.v1]: v1Trade, [Version.v2]: v2Trade }[toggledVersion]
 
   const betterTradeLinkVersion: Version | undefined =
     toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
@@ -105,10 +114,7 @@ const Swap = () => {
       : undefined
 
   const parsedAmounts = showWrap
-    ? {
-        [Field.INPUT]: parsedAmount,
-        [Field.OUTPUT]: parsedAmount
-      }
+    ? { [Field.INPUT]: parsedAmount, [Field.OUTPUT]: parsedAmount }
     : {
         [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
         [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
@@ -306,7 +312,7 @@ const Swap = () => {
             onDismiss={handleConfirmDismiss}
           />
           <PageHeader title="Exchange" description="Trade tokens in an instant" />
-          <CardBody>
+          <StyledCardBody>
             <AutoColumn gap={'md'}>
               <CurrencyInputPanel
                 label={
@@ -326,17 +332,15 @@ const Swap = () => {
               <AutoColumn justify="space-between">
                 <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
                   <ArrowWrapper clickable>
-                    <IconButton
-                      variant="tertiary"
+                    <StyledIconButton
                       onClick={() => {
                         setApprovalSubmitted(false) // reset 2 step UI for approvals
                         onSwitchTokens()
                       }}
-                      style={{ borderRadius: '50%' }}
                       size="sm"
                     >
-                      <ArrowDownIcon color="primary" width="24px" />
-                    </IconButton>
+                      <SyncVerticalIcon color="primary" width="24px" />
+                    </StyledIconButton>
                   </ArrowWrapper>
                   {recipient === null && !showWrap && isExpertMode ? (
                     <LinkStyledButton id="add-recipient-button" onClick={() => onChangeRecipient('')}>
@@ -373,11 +377,13 @@ const Swap = () => {
               ) : null}
 
               {showWrap ? null : (
-                <Card padding={'.25rem .75rem 0 .75rem'} borderRadius={'20px'}>
-                  <AutoColumn gap="4px">
+                <Card padding={'4px 27px 0 27px'} borderRadius={'20px'}>
+                  <AutoColumn gap="8px">
                     {Boolean(trade) && (
                       <RowBetween align="center">
-                        <Text fontSize="14px">Price</Text>
+                        <StyledText fontSize="16px" account={account}>
+                          Price
+                        </StyledText>
                         <TradePrice
                           price={trade?.executionPrice}
                           showInverted={showInverted}
@@ -387,8 +393,12 @@ const Swap = () => {
                     )}
                     {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
                       <RowBetween align="center">
-                        <Text fontSize="14px">Slippage Tolerance</Text>
-                        <Text fontSize="14px">{allowedSlippage / 100}%</Text>
+                        <StyledText fontSize="16px" account={account}>
+                          Slippage Tolerance
+                        </StyledText>
+                        <StyledText fontSize="16px" account={account}>
+                          {allowedSlippage / 100}%
+                        </StyledText>
                       </RowBetween>
                     )}
                   </AutoColumn>
@@ -482,7 +492,7 @@ const Swap = () => {
               {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
               {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
             </BottomGrouping>
-          </CardBody>
+          </StyledCardBody>
         </Wrapper>
       </AppBody>
       <AdvancedSwapDetailsDropdown trade={trade} />
