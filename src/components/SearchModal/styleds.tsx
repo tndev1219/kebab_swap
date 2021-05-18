@@ -19,12 +19,11 @@ export const FadedSpan = styled(RowFixed)`
 `
 
 export const PaddedColumn = styled(AutoColumn)`
-  padding: 20px;
-  padding-bottom: 12px;
+  padding: 38px 31px 12px 31px;
 `
 
 export const MenuItem = styled(RowBetween)`
-  padding: 4px 20px;
+  padding: 4px 31px;
   height: 56px;
   display: grid;
   grid-template-columns: auto minmax(auto, 1fr) auto minmax(0, 72px);
@@ -40,23 +39,23 @@ export const MenuItem = styled(RowBetween)`
 export const SearchInput = styled.input`
   position: relative;
   display: flex;
-  padding: 16px;
   align-items: center;
   width: 100%;
+  height: 48px;
+  padding: 12px 27px;
   white-space: nowrap;
   background: none;
-  border: none;
+  border: 1px solid ${({ theme }) => theme.colors.textInactive};
+  border-radius: 19px;
   outline: none;
-  border-radius: 20px;
-  color: ${({ theme }) => theme.colors.text};
-  border-style: solid;
-  border: 1px solid ${({ theme }) => theme.colors.tertiary};
+  color: ${({ theme }) => theme.colors.footer};
   -webkit-appearance: none;
 
-  font-size: 18px;
+  font-size: 16px;
+  font-family: GilroySemiBold;
 
   ::placeholder {
-    color: ${({ theme }) => theme.colors.textDisabled};
+    color: ${({ theme }) => theme.colors.textInactive};
   }
   transition: border 100ms;
   :focus {

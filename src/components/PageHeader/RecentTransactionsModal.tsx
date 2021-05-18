@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import styled from 'styled-components'
 import { CheckmarkCircleIcon, ErrorIcon, Flex, LinkExternal, Text, Modal, Button } from 'kebabfinance-uikit'
 import { useActiveWeb3React } from 'hooks'
 import { getEtherscanLink } from 'utils'
@@ -9,6 +10,10 @@ import Loader from 'components/Loader'
 type RecentTransactionsModalProps = {
   onDismiss?: () => void
 }
+
+const StyledButton = styled(Button)`
+  width: 200px;
+`
 
 // TODO: Fix UI Kit typings
 const defaultOnDismiss = () => null
@@ -44,22 +49,22 @@ const RecentTransactionsModal = ({ onDismiss = defaultOnDismiss }: RecentTransac
     <Modal title="Recent Transactions" onDismiss={onDismiss}>
       {!account && (
         <Flex justifyContent="center" flexDirection="column" alignItems="center">
-          <Text mb="8px" bold>
+          <Text mb="16px" bold>
             Please connect your wallet to view your recent transactions
           </Text>
-          <Button variant="tertiary" size="sm" onClick={onDismiss}>
+          <StyledButton variant="primary" onClick={onDismiss}>
             Close
-          </Button>
+          </StyledButton>
         </Flex>
       )}
       {account && chainId && sortedRecentTransactions.length === 0 && (
         <Flex justifyContent="center" flexDirection="column" alignItems="center">
-          <Text mb="8px" bold>
+          <Text mb="16px" bold>
             No recent transactions
           </Text>
-          <Button variant="tertiary" size="sm" onClick={onDismiss}>
+          <StyledButton variant="primary" onClick={onDismiss}>
             Close
-          </Button>
+          </StyledButton>
         </Flex>
       )}
       {account &&

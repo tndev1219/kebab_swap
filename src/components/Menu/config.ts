@@ -4,7 +4,9 @@ const config: MenuEntry[] = [
   {
     label: 'Home',
     icon: 'HomeIcon',
-    href: 'https://kebabfinance.com'
+    href: 'https://kebabfinance.com',
+    color: '#E46149',
+    backgroundColor: '#FADFDB'
   },
   {
     label: 'Trade',
@@ -18,17 +20,37 @@ const config: MenuEntry[] = [
         label: 'Liquidity',
         href: '/pool'
       }
-    ]
+    ],
+    color: '#197BBD',
+    backgroundColor: '#D1E5F2'
+  },
+  {
+    label: 'Dashboard',
+    icon: 'DashboardIcon',
+    href: 'https://kebabfinance.com/#/dashboard',
+    color: '#7A23BE',
+    backgroundColor: '#E4D3F2'
   },
   {
     label: 'Farming',
     icon: 'FarmIcon',
-    href: 'https://kebabfinance.com/#/farms'
+    href: 'https://kebabfinance.com/#/farms',
+    color: '#11A373',
+    backgroundColor: '#CFEDE3'
   },
   {
     label: 'Staking',
     icon: 'PoolIcon',
-    href: 'https://kebabfinance.com/#/syrup'
+    href: 'https://kebabfinance.com/#/syrup',
+    color: '#F7931A',
+    backgroundColor: '#FDE9D1'
+  },
+  {
+    label: 'IFO',
+    icon: 'IfoIcon',
+    href: '/ifo',
+    color: '#404040',
+    backgroundColor: '#D9D9D9'
   },
   {
     label: 'Info',
@@ -50,7 +72,9 @@ const config: MenuEntry[] = [
         label: 'Accounts',
         href: 'https://info.kebabfinance.com/#/accounts'
       }
-    ]
+    ],
+    color: '#BC1FAA',
+    backgroundColor: '#F2D2EE'
   },
   {
     label: 'More',
@@ -68,7 +92,9 @@ const config: MenuEntry[] = [
         label: 'Blog',
         href: 'https://kebabfinance1.medium.com'
       }
-    ]
+    ],
+    color: '#DCAB2F',
+    backgroundColor: '#F8EED5'
   }
 ]
 

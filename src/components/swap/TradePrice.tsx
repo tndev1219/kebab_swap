@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Price } from '@pancakeswap-libs/sdk'
 import { SyncAltIcon, Text } from 'kebabfinance-uikit'
 import { StyledBalanceMaxMini } from './styleds'
@@ -9,6 +10,13 @@ interface TradePriceProps {
   setShowInverted: (showInverted: boolean) => void
 }
 
+const StyledText = styled(Text)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.text};
+`
+
 export default function TradePrice({ price, showInverted, setShowInverted }: TradePriceProps) {
   const formattedPrice = showInverted ? price?.toSignificant(6) : price?.invert()?.toSignificant(6)
 
@@ -18,7 +26,7 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
     : `${price?.baseCurrency?.symbol} per ${price?.quoteCurrency?.symbol}`
 
   return (
-    <Text fontSize="14px" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+    <StyledText fontSize="16px" bold>
       {show ? (
         <>
           {formattedPrice ?? '-'} {label}
@@ -29,6 +37,6 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
       ) : (
         '-'
       )}
-    </Text>
+    </StyledText>
   )
 }

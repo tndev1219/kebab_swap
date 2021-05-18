@@ -1,4 +1,5 @@
 import { Currency, ETHER, Token } from '@pancakeswap-libs/sdk'
+import styled from 'styled-components'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { Text, CloseIcon } from 'kebabfinance-uikit'
 import { useSelector } from 'react-redux'
@@ -35,6 +36,11 @@ interface CurrencySearchProps {
   showCommonBases?: boolean
   onChangeList: () => void
 }
+
+const StyledText = styled(Text)`
+  display: flex;
+  align-items: center;
+`
 
 export function CurrencySearch({
   selectedCurrency,
@@ -138,9 +144,9 @@ export function CurrencySearch({
 
   return (
     <Column style={{ width: '100%', flex: '1 1' }}>
-      <PaddedColumn gap="14px">
-        <RowBetween>
-          <Text>
+      <PaddedColumn gap="4px">
+        <RowBetween mb="20px">
+          <StyledText bold>
             <TranslatedText translationId={82}>Select a token</TranslatedText>
             <QuestionHelper
               text={TranslateString(
@@ -148,8 +154,8 @@ export function CurrencySearch({
                 'Find a token by searching for its name or symbol or by pasting its address below.'
               )}
             />
-          </Text>
-          <CloseIcon onClick={onDismiss} />
+          </StyledText>
+          <CloseIcon onClick={onDismiss} color="primary" />
         </RowBetween>
         <SearchInput
           type="text"
@@ -164,14 +170,12 @@ export function CurrencySearch({
           <CommonBases chainId={chainId} onSelect={handleCurrencySelect} selectedCurrency={selectedCurrency} />
         )}
         <RowBetween>
-          <Text fontSize="14px">
+          <StyledText fontSize="14px">
             <TranslatedText translationId={126}>Token name</TranslatedText>
-          </Text>
+          </StyledText>
           <SortButton ascending={invertSearchOrder} toggleSortOrder={() => setInvertSearchOrder(iso => !iso)} />
         </RowBetween>
       </PaddedColumn>
-
-      <Separator />
 
       <div style={{ flex: '1' }}>
         <AutoSizer disableWidth>

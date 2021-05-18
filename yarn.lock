@@ -9998,6 +9998,16 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
+kebabfinance-uikit@^0.8.16:
+  version "0.8.17"
+  resolved "https://registry.yarnpkg.com/kebabfinance-uikit/-/kebabfinance-uikit-0.8.17.tgz#2cfc6902a018c2845174317bba5d7a91e050bbc5"
+  integrity sha512-/t+sWR4/dZrTyOdxXK0U5X5sprfVcv+n6+V4OEtZHazHRiIdbs7XuFKWzmM4oqYyS76z+EfGuzr5/K6gyO7Adw==
+  dependencies:
+    "@types/lodash" "^4.14.162"
+    "@types/styled-system" "^5.1.10"
+    lodash "^4.17.20"
+    styled-system "^5.1.5"
+
 keccak@^1.0.2:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/keccak/-/keccak-1.4.0.tgz#572f8a6dbee8e7b3aa421550f9e6408ca2186f80"
