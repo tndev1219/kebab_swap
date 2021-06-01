@@ -3,11 +3,13 @@ import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useActiveWeb3React } from '../../hooks'
 import { useFetchListCallback } from '../../hooks/useFetchListCallback'
+import useGetTokenList from '../../hooks/useGetTokenList'
 import useInterval from '../../hooks/useInterval'
 import useIsWindowVisible from '../../hooks/useIsWindowVisible'
 import { addPopup } from '../application/actions'
 import { AppDispatch, AppState } from '../index'
-import { acceptListUpdate } from './actions'
+import { acceptListUpdate, initList } from './actions'
+import { DEFAULT_TOKEN_LIST_URL } from '../../constants/lists'
 
 export default function Updater(): null {
   const { library } = useActiveWeb3React()
@@ -17,6 +19,8 @@ export default function Updater(): null {
   const isWindowVisible = useIsWindowVisible()
 
   const fetchList = useFetchListCallback()
+
+  const fetchTokenList = useGetTokenList()
 
   const fetchAllListsCallback = useCallback(() => {
     if (!isWindowVisible) return
@@ -93,6 +97,13 @@ export default function Updater(): null {
       }
     })
   }, [dispatch, lists])
+
+  // token list init when root component mount
+  useEffect(() => {
+    const tokenList = fetchTokenList
+
+    dispatch(initList({ url: DEFAULT_TOKEN_LIST_URL, tokenList }))
+  }, [dispatch, fetchTokenList])
 
   return null
 }
