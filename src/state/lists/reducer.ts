@@ -3,7 +3,7 @@ import { getVersionUpgrade, VersionUpgrade } from '@uniswap/token-lists'
 import { TokenList } from '@uniswap/token-lists/dist/types'
 import { DEFAULT_LIST_OF_LISTS, DEFAULT_TOKEN_LIST_URL } from '../../constants/lists'
 import { updateVersion } from '../global/actions'
-import { acceptListUpdate, addList, fetchTokenList, removeList, selectList } from './actions'
+import { acceptListUpdate, addList, fetchTokenList, removeList, selectList, initList } from './actions'
 import DEFAULT_LIST from '../../constants/token/pancakeswap.json'
 
 export interface ListsState {
@@ -95,6 +95,14 @@ export default createReducer(initialState, builder =>
         loadingRequestId: null,
         error: errorMessage,
         current: null,
+        pendingUpdate: null
+      }
+    })
+    .addCase(initList, (state, { payload: { url = DEFAULT_TOKEN_LIST_URL, tokenList } }) => {
+      state.byUrl[url] = {
+        loadingRequestId: null,
+        error: null,
+        current: tokenList,
         pendingUpdate: null
       }
     })
