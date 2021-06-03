@@ -5,6 +5,7 @@ import GlobalStyle from './style/Global'
 import App from './pages/App'
 import ApplicationUpdater from './state/application/updater'
 import ListsUpdater from './state/lists/updater'
+import FarmsUpdater from './state/farms/updater'
 import MulticallUpdater from './state/multicall/updater'
 import TransactionUpdater from './state/transactions/updater'
 import Providers from './Providers'
@@ -24,6 +25,7 @@ ReactDOM.render(
     <Providers>
       <>
         <ListsUpdater />
+        <FarmsUpdater />
         <ApplicationUpdater />
         <TransactionUpdater />
         <MulticallUpdater />

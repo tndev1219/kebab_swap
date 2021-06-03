@@ -2,9 +2,10 @@ import React from 'react'
 import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import { Provider } from 'react-redux'
 import { ModalProvider } from 'kebabfinance-uikit'
+import { RefreshContextProvider } from 'contexts/RefreshContext'
+import getLibrary from 'utils/getLibrary'
 import { NetworkContextName } from './constants'
 import store from './state'
-import getLibrary from './utils/getLibrary'
 import { ThemeContextProvider } from './ThemeContext'
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
@@ -15,7 +16,9 @@ const Providers: React.FC = ({ children }) => {
       <Web3ProviderNetwork getLibrary={getLibrary}>
         <Provider store={store}>
           <ThemeContextProvider>
-            <ModalProvider>{children}</ModalProvider>
+            <RefreshContextProvider>
+              <ModalProvider>{children}</ModalProvider>
+            </RefreshContextProvider>
           </ThemeContextProvider>
         </Provider>
       </Web3ProviderNetwork>

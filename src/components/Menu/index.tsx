@@ -4,16 +4,21 @@ import { useWeb3React } from '@web3-react/core'
 import { allLanguages } from 'constants/localisation/languageCodes'
 import { LanguageContext } from 'hooks/LanguageContext'
 import useTheme from 'hooks/useTheme'
-import useGetPriceData from 'hooks/useGetPriceData'
 import { injected, bsc, walletconnect } from 'connectors'
+import { usePriceCakeBusd } from 'state/farms/hooks'
 import links from './config'
 
 const Menu: React.FC = props => {
   const { account, activate, deactivate } = useWeb3React()
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
   const { isDark, toggleTheme } = useTheme()
-  const priceData = useGetPriceData()
-  const cakePriceUsd = priceData ? Number(priceData.prices.KEBAB) : undefined
+  const cakePriceUsd = usePriceCakeBusd()
+  if (!sessionStorage.lastprice) sessionStorage.lastprice = cakePriceUsd.toNumber().toString()
+  if (sessionStorage.lastprice !== cakePriceUsd.toNumber().toString()) {
+    setTimeout(() => {
+      sessionStorage.lastprice = cakePriceUsd.toNumber().toString()
+    }, 1500)
+  }
 
   return (
     <UikitMenu
@@ -36,7 +41,8 @@ const Menu: React.FC = props => {
       currentLang={selectedLanguage?.code || ''}
       langs={allLanguages}
       setLang={setSelectedLanguage}
-      cakePriceUsd={cakePriceUsd}
+      cakePriceUsd={cakePriceUsd.toNumber()}
+      priceUp={Number(sessionStorage.lastprice) < cakePriceUsd.toNumber()}
       {...props}
     />
   )
