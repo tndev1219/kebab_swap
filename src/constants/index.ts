@@ -6,6 +6,9 @@ import { injected, bsc } from '../connectors'
 // TODO
 export const ROUTER_ADDRESS = '0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F'
 
+export const GET_TOKENS_LIST_URL = 'https://run.mocky.io/v3/be9abbea-72c1-48c8-84e4-c1e853d237f0'
+export const GET_FARMS_LIST_URL = 'https://run.mocky.io/v3/f3f2c66d-65b5-4a1c-a7aa-9d8ee8710f42'
+
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]

@@ -8,10 +8,10 @@ import transactions from './transactions/reducer'
 import swap from './swap/reducer'
 import mint from './mint/reducer'
 import lists from './lists/reducer'
+import farms from './farms'
 import burn from './burn/reducer'
 import multicall from './multicall/reducer'
 import { getThemeCache } from '../utils/theme'
-
 type MergedState = {
   user: {
     [key: string]: any
@@ -33,7 +33,8 @@ const store = configureStore({
     mint,
     burn,
     multicall,
-    lists
+    lists,
+    farms
   },
   middleware: [...getDefaultMiddleware({ thunk: false }), save({ states: PERSISTED_KEYS })],
   preloadedState: loadedState
