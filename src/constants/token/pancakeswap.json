@@ -682,6 +682,13 @@
       "address": "0x71DE20e0C4616E7fcBfDD3f875d568492cBE4739",
       "chainId": 56,
       "decimals": 18
+    },
+    {
+      "name": "Kebab Silver",
+      "symbol": "KSLV",
+      "address": "0x58b8e295fc5b705bcbb48c5978b2b389332e0414",
+      "chainId": 56,
+      "decimals": 18
     }
   ]
 }

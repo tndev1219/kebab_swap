@@ -41,7 +41,7 @@ const config: MenuEntry[] = [
   {
     label: 'Staking',
     icon: 'PoolIcon',
-    href: 'https://kebabfinance.com/#/syrup',
+    href: 'https://kebabfinance.com/#/pools',
     color: '#F7931A',
     backgroundColor: '#FDE9D1'
   },
@@ -81,8 +81,8 @@ const config: MenuEntry[] = [
     icon: 'MoreIcon',
     items: [
       {
-        label: 'Governance',
-        href: 'https://gov.kebabfinance.com'
+        label: 'Documentation',
+        href: 'https://docs.kebabfinance.com'
       },
       {
         label: 'Github',
@@ -90,7 +90,7 @@ const config: MenuEntry[] = [
       },
       {
         label: 'Blog',
-        href: 'https://kebabfinance1.medium.com'
+        href: 'https://kebabfinance.medium.com'
       }
     ],
     color: '#DCAB2F',

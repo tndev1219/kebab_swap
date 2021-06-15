@@ -5,9 +5,9 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { injected, bsc } from '../connectors'
 // TODO
 export const ROUTER_ADDRESS = '0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F'
-
-export const GET_TOKENS_LIST_URL = 'https://run.mocky.io/v3/be9abbea-72c1-48c8-84e4-c1e853d237f0'
-export const GET_FARMS_LIST_URL = 'https://run.mocky.io/v3/f3f2c66d-65b5-4a1c-a7aa-9d8ee8710f42'
+// export const ROUTER_ADDRESS = '0x10ed43c718714eb63d5aa57b78b54704e256024e'
+export const GET_TOKENS_LIST_URL = 'https://lists.kebabfinance.com/tokens.json'
+export const GET_FARMS_LIST_URL = 'https://lists.kebabfinance.com/farms.json'
 
 // a list of tokens by chain
 type ChainTokenList = {
@@ -22,6 +22,13 @@ export const DOT = new Token(ChainId.MAINNET, '0x7083609fce4d1d8dc0c979aab8c869e
 export const ETH = new Token(ChainId.MAINNET, '0x2170ed0880ac9a755fd29b2688956bd959f933f8', 18, 'ETH', 'Ethereum Token')
 export const BTC = new Token(ChainId.MAINNET, '0x615446C0Fd5eA8A5FD7fb763f3FC2C58774474F3', 18, 'BTCB', 'Bitcoin Token')
 export const UST = new Token(ChainId.MAINNET, '0x23396cF899Ca06c4472205fC903bDB4de249D6fC', 18, 'UST', 'UST Token')
+export const KEBAB = new Token(
+  ChainId.MAINNET,
+  '0x7979f6c54eba05e18ded44c4f986f49a5de551c2',
+  18,
+  'Kebab',
+  'Kebab Token'
+)
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
@@ -31,7 +38,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], BUSD, BTC, UST]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], BUSD, BTC, UST, KEBAB]
 }
 
 /**

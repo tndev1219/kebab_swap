@@ -129,7 +129,7 @@ export default function Pool() {
                   </StyledInternalLink>
                 </Text>
                 <Text fontSize="14px" bold style={{ padding: '.5rem 0 0 0' }}>
-                  Or, if you staked your FLIP tokens in a farm, unstake them to see them here.
+                  Or, if you staked your LP tokens in a farm, unstake them to see them here.
                 </Text>
               </div>
             </AutoColumn>
